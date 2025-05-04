@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+body {
+background-color: #ebeef3;
+font-family: 'Inter UI', sans-serif;
+font-size: 12px;
+font-weight: 400;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 941px;
+  height: 140px;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 12px 0 rgba(0,0,0, .15);
+  padding: 20px;
+  margin-top: 26px;
+  &_main {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+  }
+  &_title {
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    a {
+      height: 28px;
+      text-decoration: none;
+    }
+    h3 {
+      font-size: 20px;
+      font-weight: inherit;
+      color: #1890ff;
+      padding-right: 13px;
+    }
+    span {
+      color: #000000bf;
+      
+    }
+  }
+  &_tags {
+    display: flex;
+    gap: 8px;
+  }
+  &_tag {
+    padding: 3px 6px;
+    border: 1px solid rgba(0,0,0, .5);
+    border-radius: 2px;
+  }
+  &_like {
+    width: 16px;
+    height: 16px;
+    transition-property: fill;
+    fill: red; 
+    padding-right: 3px;
+  }
+}
+
+.person {
+  display: grid;
+  grid-template-areas:
+  "username avatar"
+  "datatime avatar";
+  grid-template-rows: 28px 22px;
+  grid-template-columns: auto 46px; /* Добавляем колонку для аватара */
+
+  &_username {
+    grid-area: username;
+    padding-right: 10px;
+    justify-self: end;
+    font-size: 18px;
+  }
+  &_date {
+    grid-area: datatime;
+    padding-right: 10px;
+    justify-self: end;
+    color: gray;
+  }
+  img {
+    grid-area: avatar;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    }
+  }
+

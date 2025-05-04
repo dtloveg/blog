@@ -1,18 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
-import TicketsList from '../ticket-list'
-import TicketsFilter from '../tickets-filter'
+import LoginPage from '../../pages/login-page'
+import HomePage from '../../pages/home-page'
+import RegisterPage from '../../pages/register-page'
+import { fetchArticles } from '../../store/slices/articleSlice'
+import ArticlesList from '../article-list'
+import Paginations from '../pagination/pagination'
 
 import classes from './app.module.scss'
-import logo from './logo.svg'
 
 function App() {
+  const articlesCount = useSelector((state) => state.article.articlesCount)
+  const currentPage = useSelector((state) => state.article.currentPage)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchArticles({ page: currentPage }))
+  }, [dispatch, currentPage])
+
   return (
     <>
-      <img className={classes.logo} src={logo}></img>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
       <main className={classes.main}>
-        <TicketsFilter />
-        <TicketsList />
+        <ArticlesList />
+        <Paginations articlesCount={articlesCount} />
       </main>
     </>
   )
