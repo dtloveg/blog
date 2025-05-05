@@ -3,12 +3,14 @@
   padding: 0;
   border: none;
 }
-
+ul {
+  list-style-type: none;
+}
 body {
-background-color: #ebeef3;
-font-family: 'Inter UI', sans-serif;
-font-size: 12px;
-font-weight: 400;
+  background-color: #ebeef3;
+  font-family: 'Inter UI', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .card {
@@ -16,15 +18,25 @@ font-weight: 400;
   flex-direction: row;
   justify-content: space-between;
   width: 941px;
-  height: 140px;
-  background-color: #FFFFFF;
-  box-shadow: 0 4px 12px 0 rgba(0,0,0, .15);
+  min-height: 140px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
   padding: 20px;
   margin-top: 26px;
+
   &_main {
     display: flex;
     flex-direction: column;
     row-gap: 4px;
+    max-width: 800px;
+  }
+  &_fav-button {
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 28px;
+    cursor: pointer;
   }
   &_title {
     display: flex;
@@ -42,23 +54,38 @@ font-weight: 400;
     }
     span {
       color: #000000bf;
-      
     }
+  }
+  &_description {
+    line-height: 22px;
+    &_gray {
+      color: rgba(0, 0, 0, 0.5);
+      margin-top: 16px;
+      margin-bottom: 25px;
+    }
+  
   }
   &_tags {
     display: flex;
     gap: 8px;
   }
   &_tag {
+    height: 14px;
     padding: 3px 6px;
-    border: 1px solid rgba(0,0,0, .5);
+    border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 2px;
+    &_gray {
+      padding: 3px 6px;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      border-radius: 2px;
+      color: rgba(0, 0, 0, 0.5);
+    }
   }
   &_like {
     width: 16px;
     height: 16px;
     transition-property: fill;
-    fill: red; 
+    fill: red;
     padding-right: 3px;
   }
 }
@@ -66,10 +93,9 @@ font-weight: 400;
 .person {
   display: grid;
   grid-template-areas:
-  "username avatar"
-  "datatime avatar";
+    'username avatar'
+    'datatime avatar';
   grid-template-rows: 28px 22px;
-  grid-template-columns: auto 46px; /* Добавляем колонку для аватара */
 
   &_username {
     grid-area: username;
@@ -88,6 +114,5 @@ font-weight: 400;
     width: 46px;
     height: 46px;
     border-radius: 50%;
-    }
   }
-
+}

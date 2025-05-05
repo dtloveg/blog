@@ -14,11 +14,19 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async ({
     articlesCount: articlesData.articlesCount,
   }
 })
-
+export const fetchArticleBySlug = createAsyncThunk('articles/fetchArticleBySlug', async (slug) => {
+  const response = await fetch(`${baseUrl}/articles/${slug}`)
+  if (!response.ok) {
+    throw new Error('Ошибка при получении статьи: ' + response.statusText)
+  }
+  const articleData = await response.json()
+  return articleData.article
+})
 const initialState = {
   articles: [],
   articlesCount: 0,
   currentPage: 1,
+  currentArticle: null,
   status: null,
   error: null,
   isLoading: true,
@@ -29,7 +37,7 @@ export const articleSlice = createSlice({
   initialState,
   reducers: {
     setCurrentPage: (state, action) => {
-      state.currentPage = action.payload // Редюсер для изменения текущей страницы
+      state.currentPage = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -49,6 +57,19 @@ export const articleSlice = createSlice({
         state.status = 'error'
         state.error = action.error.message
         state.isLoading = false
+      })
+      .addCase(fetchArticleBySlug.pending, (state) => {
+        state.status = 'loading'
+        state.error = null
+        state.currentArticle = null
+      })
+      .addCase(fetchArticleBySlug.fulfilled, (state, action) => {
+        state.status = 'resolved'
+        state.currentArticle = action.payload
+      })
+      .addCase(fetchArticleBySlug.rejected, (state, action) => {
+        state.status = 'error'
+        state.error = action.error.message
       })
   },
 })

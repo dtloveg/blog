@@ -11,10 +11,8 @@ const ArticlesList = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchArticles({ page: currentPage, pageSize: 5 })) // Загрузка статей при первом рендере
+    dispatch(fetchArticles({ page: currentPage, pageSize: 5 }))
   }, [dispatch, currentPage])
-  console.log('currentPage:', currentPage)
-  console.log('articles:', articles)
   if (status === 'loading') {
     return <span>Загрузка статей...</span>
   }

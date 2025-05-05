@@ -10,8 +10,8 @@ const Paginations = ({ articlesCount }) => {
   const currentPage = useSelector((state) => state.article.currentPage)
 
   const handlePageChange = (page) => {
-    dispatch(setCurrentPage(page)) // Устанавливаем текущую страницу
-    dispatch(fetchArticles({ page, pageSize: 5 })) // Загружаем статьи для новой страницы
+    dispatch(setCurrentPage(page))
+    dispatch(fetchArticles({ page, pageSize: 5 }))
   }
 
   return (
