@@ -2,10 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { fetchArticleBySlug, EditArticle } from '../../../store/slices/articleSlice'
-
-import ArticleForm from './article-form'
-import classes from './article-form.module.scss'
+import { fetchArticleBySlug, EditArticle } from '../../store/slices/articleSlice'
+import ArticleForm from '../form/article/article-form'
 
 const EditArticles = () => {
   const dispatch = useDispatch()
@@ -25,9 +23,7 @@ const EditArticles = () => {
       body: data.body,
       tagList: tagList,
     }
-    console.log('Submitting article data:', articleData)
     const resultAction = await dispatch(EditArticle({ slug, articleData }))
-    console.log('Result action:', resultAction)
     if (EditArticle.fulfilled.match(resultAction)) {
       navigate('/')
     }
@@ -45,7 +41,7 @@ const EditArticles = () => {
   }
 
   return (
-    <main className={classes.main}>
+    <main style={{margin: '60px 0'}}>
       <ArticleForm onSubmit={onSubmit} defaultValues={defaultValues} />
     </main>
   )

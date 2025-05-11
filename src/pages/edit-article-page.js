@@ -1,6 +1,6 @@
 import React from 'react'
 
-import EditArticles from '../components/form/article/edit-article'
+import EditArticles from '../components/article/edit-article'
 
 const EditArticlePage = () => {
   return <EditArticles />

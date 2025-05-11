@@ -2,10 +2,9 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { CreateArticle } from '../../../store/slices/articleSlice'
+import { CreateArticle } from '../../store/slices/articleSlice'
 
-import ArticleForm from './article-form'
-import classes from './article-form.module.scss'
+import ArticleForm from '../form/article/article-form'
 
 const CreateArticles = () => {
   const dispatch = useDispatch()
@@ -19,7 +18,6 @@ const CreateArticles = () => {
       body: data.body,
       tagList: tagList,
     }
-    console.log('Submitting article data:', article)
     const resultAction = await dispatch(CreateArticle(article))
     if (CreateArticle.fulfilled.match(resultAction)) {
       navigate('/')
@@ -27,7 +25,7 @@ const CreateArticles = () => {
   }
 
   return (
-    <main className={classes.main}>
+    <main style={{margin: '60px 0'}}>
       <ArticleForm onSubmit={onSubmit} />
     </main>
   )

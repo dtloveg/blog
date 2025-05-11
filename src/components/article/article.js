@@ -5,7 +5,8 @@ import propTypes from 'prop-types'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-
+import { Popconfirm, Button } from 'antd'
+import DeleteArticle from './delete-article'
 import classes from './article.module.scss'
 
 const Article = ({ article, showBody }) => {
@@ -56,7 +57,7 @@ const Article = ({ article, showBody }) => {
           <img src={author.image} alt={author.username} />
           {isLogIn && author.username === currentUser && showBody && (
             <div className={classes.person_buttons}>
-              <button className={`${classes['person_button']} ${classes['person_button--delete']}`}>Delete</button>
+        <DeleteArticle slug={slug} />
               <button
                 className={`${classes['person_button']} ${classes['person_button--edit']}`}
                 onClick={handleEditClick}

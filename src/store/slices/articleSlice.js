@@ -73,6 +73,29 @@ export const EditArticle = createAsyncThunk(
     }
   }
 )
+export const DeleteArticle = createAsyncThunk(
+  'articles/deleteArticle',
+  async (slug, { getState, rejectWithValue }) => {
+    const state = getState();
+    const token = state.user.token;
+    try {
+      const response = await fetch(`${baseUrl}/articles/${slug}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData.errors);
+      }
+      return slug;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const initialState = {
   articles: [],
