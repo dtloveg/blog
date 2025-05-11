@@ -19,7 +19,7 @@ header {
       margin-right: auto;
     }
   }
- 
+
   img {
     width: 46px;
     height: 46px;
@@ -34,21 +34,18 @@ header {
     border: 1px solid black;
     border-radius: 5px;
     cursor: pointer;
-
   }
-
 }
 
-.link_with_auth, .link_without_auth {
-    color: #52c41a;
-    border: 1px solid #52c41a;
-    border-radius: 5px;
-    display: inline-block;
-  }
-
+.link_with_auth,
+.link_without_auth {
+  color: #52c41a;
+  border: 1px solid #52c41a;
+  border-radius: 5px;
+  display: inline-block;
+}
 
 .personal_info {
-    display: flex;
-    align-items: center
+  display: flex;
+  align-items: center;
 }
-

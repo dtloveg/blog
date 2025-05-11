@@ -1,9 +1,9 @@
 import React from 'react'
 
-import ArticleForm from '../components/form/article/article-form'
+import CreateArticles from '../components/form/article/create-article'
 
 const NewArticlePage = () => {
-  return <ArticleForm />
+  return <CreateArticles />
 }
 
 export default NewArticlePage

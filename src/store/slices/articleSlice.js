@@ -47,6 +47,33 @@ export const CreateArticle = createAsyncThunk(
     }
   }
 )
+export const EditArticle = createAsyncThunk(
+  'articles/editArticle',
+  async ({ slug, articleData }, { getState, rejectWithValue }) => {
+    const state = getState()
+    const token = state.user.token
+    try {
+      console.log('Editing article with slug:', slug, 'and data:', articleData)
+
+      const response = await fetch(`${baseUrl}/articles/${slug}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ article: articleData }),
+      })
+      if (!response.ok) {
+        const errorData = await response.json()
+        return rejectWithValue(errorData.errors)
+      }
+      return await response.json()
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
 const initialState = {
   articles: [],
   articlesCount: 0,
@@ -55,10 +82,6 @@ const initialState = {
   status: null,
   error: null,
   isLoading: true,
-  title: '',
-  description: '',
-  text: '',
-  tags: [],
 }
 
 export const articleSlice = createSlice({
@@ -115,6 +138,22 @@ export const articleSlice = createSlice({
         state.tags = action.payload.article.tags
       })
       .addCase(CreateArticle.rejected, (state, action) => {
+        state.status = 'error'
+        state.error = action.payload
+        state.isLoading = false
+      })
+      .addCase(EditArticle.pending, (state) => {
+        state.status = 'loading'
+        state.error = null
+        state.isLoading = true
+      })
+      .addCase(EditArticle.fulfilled, (state, action) => {
+        state.status = 'resolved'
+        state.isLoading = false
+        state.isLogIn = true
+        state.currentArticle = action.payload.article
+      })
+      .addCase(EditArticle.rejected, (state, action) => {
         state.status = 'error'
         state.error = action.payload
         state.isLoading = false

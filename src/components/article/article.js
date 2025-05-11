@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import propTypes from 'prop-types'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -11,13 +12,16 @@ const Article = ({ article, showBody }) => {
   const { title, author, tagList, createdAt, description, favoritesCount, slug, body } = article
   const isLogIn = useSelector((state) => state.user.isLogIn)
   const currentUser = useSelector((state) => state.user.username)
+  const navigate = useNavigate()
 
   const formattedDate = new Date(createdAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   })
-
+  const handleEditClick = () => {
+    navigate(`/articles/${slug}/edit`)
+  }
   return (
     <article className={classes.card}>
       <div className={classes.card_main}>
@@ -50,11 +54,15 @@ const Article = ({ article, showBody }) => {
           <span className={classes.person_username}>{author.username}</span>
           <span className={classes.person_date}>{formattedDate}</span>
           <img src={author.image} alt={author.username} />
-          {isLogIn &&
-            author.username === currentUser && showBody && (
-              <div className={classes.person_buttons}>
+          {isLogIn && author.username === currentUser && showBody && (
+            <div className={classes.person_buttons}>
               <button className={`${classes['person_button']} ${classes['person_button--delete']}`}>Delete</button>
-              <button className={`${classes['person_button']} ${classes['person_button--edit']}`}>Edit</button>
+              <button
+                className={`${classes['person_button']} ${classes['person_button--edit']}`}
+                onClick={handleEditClick}
+              >
+                Edit
+              </button>
             </div>
           )}
         </div>

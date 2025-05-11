@@ -77,7 +77,6 @@ body {
   &_tags {
     display: flex;
     gap: 8px;
-
   }
   &_tag {
     height: 14px;
@@ -144,9 +143,9 @@ body {
       border-color: red;
       color: red;
     }
-       &--edit {
-      border-color: #52C41A;
-      color: #52C41A;
+    &--edit {
+      border-color: #52c41a;
+      color: #52c41a;
     }
   }
 }

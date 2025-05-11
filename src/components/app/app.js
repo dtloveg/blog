@@ -11,6 +11,7 @@ import Paginations from '../pagination/pagination'
 import Header from '../header'
 import EditProfilePage from '../../pages/edit-profile-page'
 import NewArticlePage from '../../pages/new-article-page'
+import EditArticlePage from '../../pages/edit-article-page'
 
 import classes from './app.module.scss'
 
@@ -50,6 +51,7 @@ function App() {
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/profile" element={<EditProfilePage />} />
         <Route path="/new-article" element={<NewArticlePage />} />
+        <Route path="/articles/:slug/edit" element={<EditArticlePage />} />
       </Routes>
     </>
   )
