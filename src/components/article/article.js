@@ -50,8 +50,9 @@ const Article = ({ article, showBody }) => {
           <span className={classes.person_username}>{author.username}</span>
           <span className={classes.person_date}>{formattedDate}</span>
           <img src={author.image} alt={author.username} />
-          {isLogIn && author.username === currentUser && (
-            <div className={classes.person_buttons}>
+          {isLogIn &&
+            author.username === currentUser && showBody && (
+              <div className={classes.person_buttons}>
               <button className={`${classes['person_button']} ${classes['person_button--delete']}`}>Delete</button>
               <button className={`${classes['person_button']} ${classes['person_button--edit']}`}>Edit</button>
             </div>

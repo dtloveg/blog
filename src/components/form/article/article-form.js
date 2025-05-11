@@ -51,20 +51,20 @@ const ArticleForm = () => {
               placeholder="Title"
             />
           </div>
-          <div className={classes.form_field}>
-            <label className={classes.form_label}>Text</label>
-            <input
-              className={classes.form_input}
-              type="text"
-              {...register('text', {
-                required: 'This field is required',
-              })}
-              placeholder="Text"
-            />
-          </div>
-          <div className={classes.form_tags}>
+<div className={classes.form_field}>
+    <label className={classes.form_label}>Text</label>
+    <textarea
+        className={classes.form_textarea}
+        {...register('body', {
+            required: 'This field is required',
+        })}
+        placeholder="Text"
+        rows={6} 
+    />
+</div>
+          <ul className={classes.form_tags}>
             <button className={`${classes['form_button']} ${classes['form_button--add']}`}>Add tag</button>
-          </div>
+          </ul>
         </fieldset>
         <button type="submit" className={`${classes['form_button']} ${classes['form_button--send']}`}>
           Send
