@@ -22,6 +22,31 @@ export const fetchArticleBySlug = createAsyncThunk('articles/fetchArticleBySlug'
   const articleData = await response.json()
   return articleData.article
 })
+
+export const CreateArticle = createAsyncThunk(
+  'articles/createArticle',
+  async (articleData, { getState, rejectWithValue }) => {
+    const state = getState()
+    const token = state.user.token
+    try {
+      const response = await fetch(`${baseUrl}/articles`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ article: articleData }),
+      })
+      if (!response.ok) {
+        const errorData = await response.json()
+        return rejectWithValue(errorData.errors)
+      }
+      return await response.json()
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
 const initialState = {
   articles: [],
   articlesCount: 0,
@@ -30,6 +55,10 @@ const initialState = {
   status: null,
   error: null,
   isLoading: true,
+  title: '',
+  description: '',
+  text: '',
+  tags: [],
 }
 
 export const articleSlice = createSlice({
@@ -70,6 +99,25 @@ export const articleSlice = createSlice({
       .addCase(fetchArticleBySlug.rejected, (state, action) => {
         state.status = 'error'
         state.error = action.error.message
+      })
+      .addCase(CreateArticle.pending, (state) => {
+        state.status = 'loading'
+        state.error = null
+        state.isLoading = true
+      })
+      .addCase(CreateArticle.fulfilled, (state, action) => {
+        state.status = 'resolved'
+        state.isLoading = false
+        state.isLogIn = true
+        state.title = action.payload.article.title
+        state.description = action.payload.article.description
+        state.text = action.payload.article.text
+        state.tags = action.payload.article.tags
+      })
+      .addCase(CreateArticle.rejected, (state, action) => {
+        state.status = 'error'
+        state.error = action.payload
+        state.isLoading = false
       })
   },
 })

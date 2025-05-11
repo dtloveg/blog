@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import classes from '../form.module.scss'
-import { RegisterUser } from '../../../store/slices/userSlice'
+import { RegisterUser } from '../../../../store/slices/userSlice'
 
 const FormSignUp = () => {
   const dispatch = useDispatch()

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import propTypes from 'prop-types'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -8,6 +9,8 @@ import classes from './article.module.scss'
 
 const Article = ({ article, showBody }) => {
   const { title, author, tagList, createdAt, description, favoritesCount, slug, body } = article
+  const isLogIn = useSelector((state) => state.user.isLogIn)
+  const currentUser = useSelector((state) => state.user.username)
 
   const formattedDate = new Date(createdAt).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -47,6 +50,12 @@ const Article = ({ article, showBody }) => {
           <span className={classes.person_username}>{author.username}</span>
           <span className={classes.person_date}>{formattedDate}</span>
           <img src={author.image} alt={author.username} />
+          {isLogIn && author.username === currentUser && (
+            <div className={classes.person_buttons}>
+              <button className={`${classes['person_button']} ${classes['person_button--delete']}`}>Delete</button>
+              <button className={`${classes['person_button']} ${classes['person_button--edit']}`}>Edit</button>
+            </div>
+          )}
         </div>
       </div>
       <div className={classes.card_full}>

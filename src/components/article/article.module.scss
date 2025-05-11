@@ -37,6 +37,7 @@ body {
     row-gap: 4px;
   }
   &_full {
+    font-size: 20px;
     overflow-wrap: break-word;
     margin-top: 25px;
   }
@@ -103,8 +104,10 @@ body {
   display: grid;
   grid-template-areas:
     'username avatar'
-    'datatime avatar';
-  grid-template-rows: 28px 22px;
+    'datatime avatar'
+    'button button';
+  grid-template-rows: 28px 22px 35px;
+  grid-template-columns: auto 50px;
 
   &_username {
     grid-area: username;
@@ -123,5 +126,27 @@ body {
     width: 46px;
     height: 46px;
     border-radius: 50%;
+    margin-left: auto;
+  }
+  &_buttons {
+    grid-area: button;
+    margin-top: auto;
+  }
+  &_button {
+    background-color: white;
+    height: 30px;
+    width: 75px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 15px;
+    cursor: pointer;
+    &--delete {
+      border-color: red;
+      color: red;
+    }
+       &--edit {
+      border-color: #52C41A;
+      color: #52C41A;
+    }
   }
 }

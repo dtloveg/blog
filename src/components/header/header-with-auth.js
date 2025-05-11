@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { logOut } from '../../store/slices/userSlice'
 
-import classes from './header.module.css'
+import classes from './header.module.scss'
 
 const HeaderWithAuth = () => {
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ const HeaderWithAuth = () => {
       <a href={'/articles'}>
         <span>Realworld Blog</span>
       </a>
-      <a className={classes.link_with_auth} href={'/sign-in'}>
+      <a className={classes.link_with_auth} href={'/new-article'}>
         <span>Create article</span>
       </a>
       <a className={classes.personal_info} href={'/profile'}>

@@ -69,7 +69,7 @@ const initialState = {
   token: localStorage.getItem('token') || null,
   email: localStorage.getItem('email') || null,
   username: localStorage.getItem('username') || null,
-  image: 'https://static.productionready.io/images/smiley-cyrus.jpg',
+  image: localStorage.getItem('image') || 'https://static.productionready.io/images/smiley-cyrus.jpg',
   password: null,
 }
 
@@ -140,6 +140,9 @@ const userSlice = createSlice({
         state.username = action.payload.user.username
         state.email = action.payload.user.email
         state.image = action.payload.user.image
+        localStorage.setItem('username', action.payload.user.username)
+        localStorage.setItem('email', action.payload.user.email)
+        localStorage.setItem('image', action.payload.user.image)
       })
       .addCase(EditUser.rejected, (state, action) => {
         state.status = 'error'

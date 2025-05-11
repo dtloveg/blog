@@ -10,6 +10,7 @@ import ArticlesList from '../article-list'
 import Paginations from '../pagination/pagination'
 import Header from '../header'
 import EditProfilePage from '../../pages/edit-profile-page'
+import NewArticlePage from '../../pages/new-article-page'
 
 import classes from './app.module.scss'
 
@@ -48,6 +49,7 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/profile" element={<EditProfilePage />} />
+        <Route path="/new-article" element={<NewArticlePage />} />
       </Routes>
     </>
   )

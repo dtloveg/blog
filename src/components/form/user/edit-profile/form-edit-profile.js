@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { EditUser } from '../../../store/slices/userSlice'
+import { EditUser } from '../../../../store/slices/userSlice'
 import classes from '../form.module.scss'
 
 const FormEditProfile = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FormSignIn from '../components/form/sign-in'
+import FormSignIn from '../components/form/user/sign-in'
 
 const SignInPage = () => {
   return <FormSignIn />
